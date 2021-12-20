@@ -1,7 +1,7 @@
 <?php
 //Why would we ever need to use an image generation library? All done in less than 40 lines of code...
 mb_internal_encoding("UTF-8");
-header('Content-type: image/svg+xml');
+header('content-type: application/json');
 // Input validation
 $background = (isset($_GET["background"]) && ctype_xdigit($_GET["background"]) && strlen($_GET["background"]) == 6) ? "#" . $_GET["background"] : null;
 $color = (isset($_GET["color"]) && ctype_xdigit($_GET["color"]) && strlen($_GET["color"]) == 6) ? "#" . $_GET["color"] : "#fff";
@@ -36,4 +36,4 @@ $style = "";
 if ($bold) {
     $style = "font-weight:700;";
 }
-echo '<svg style="' . $style . '" width="' . (string) $width . 'px" height="' . (string) $height . 'px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style type="text/css">@font-face {font-family: "montserratbold";src: url("https://cdn.oxro.io/fonts/montserrat-bold-webfont.woff2") format("woff2"),url("https://cdn.oxro.io/fonts/montserrat-bold-webfont.woff") format("woff");font-weight: normal;font-style: normal;}</style></defs><rect x="0" y="0" width="500" height="500" rx="' . (string)$rounded .'" style="fill:' . $background . '"/><text x="50%" y="50%" dy=".1em" fill="' . $color . '" text-anchor="middle" dominant-baseline="middle" style="font-family: &quot;Montserrat&quot;, sans-serif; font-size: ' . (string) $font_size . 'px; line-height: 1">' . $letters . '</text></svg>';
+echo json_encode(["image" => '<svg style="' . $style . '" width="' . (string) $width . 'px" height="' . (string) $height . 'px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style type="text/css">@font-face {font-family: "montserratbold";src: url("https://cdn.oxro.io/fonts/montserrat-bold-webfont.woff2") format("woff2"),url("https://cdn.oxro.io/fonts/montserrat-bold-webfont.woff") format("woff");font-weight: normal;font-style: normal;}</style></defs><rect x="0" y="0" width="500" height="500" rx="' . (string)$rounded .'" style="fill:' . $background . '"/><text x="50%" y="50%" dy=".1em" fill="' . $color . '" text-anchor="middle" dominant-baseline="middle" style="font-family: &quot;Montserrat&quot;, sans-serif; font-size: ' . (string) $font_size . 'px; line-height: 1">' . $letters . '</text></svg>']);
